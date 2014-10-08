@@ -22,22 +22,42 @@
  */
 package org.infinispan.quickstart.jbossas7;
 
-import org.infinispan.AdvancedCache;
-import org.infinispan.configuration.cache.CacheMode;
-
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.infinispan.AdvancedCache;
+import org.infinispan.configuration.cache.CacheMode;
+import org.infinispan.manager.EmbeddedCacheManager;
 
 @SessionScoped
 @Named
 public class Controller implements Serializable {
    
+ 
    @Inject
+   private EmbeddedCacheManager container;
+   
    transient AdvancedCache<Object, Object> cache;
+	
+   //@Produces
+   //@Resource(lookup="jboss-as7-quickstart-cache")
+   //transient AdvancedCache<Object, Object> cache;
+   
+   @PostConstruct
+   public void after() {
+	   cache = container.getCache().getAdvancedCache();
+		System.out.println("CACHE MANAGER: "
+				+ container.getCacheManagerConfiguration()
+						.globalJmxStatistics().enabled());
+		System.out.println("CACHE: " + cache.getName() + "; STATISTICS: "
+				+ cache.getCacheConfiguration().jmxStatistics().enabled());
+   }
    
    private transient Object key;
    private transient Object value;

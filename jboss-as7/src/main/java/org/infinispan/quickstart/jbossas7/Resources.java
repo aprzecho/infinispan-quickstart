@@ -22,18 +22,19 @@
  */
 package org.infinispan.quickstart.jbossas7;
 
-import org.infinispan.manager.EmbeddedCacheManager;
-
 import javax.annotation.Resource;
 import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
+import org.infinispan.manager.EmbeddedCacheManager;
+
 @Singleton
+@ApplicationScoped
 public class Resources {
 
-   @SuppressWarnings("unused")
-   @Produces
-   @Resource(lookup="java:jboss/infinispan/container/jboss-as7-quickstart")
-   private static EmbeddedCacheManager container;
-   
+	@Produces
+	@Resource(lookup = "java:jboss/infinispan/container/jboss-as7-quickstart")
+	private static EmbeddedCacheManager container;
+
 }

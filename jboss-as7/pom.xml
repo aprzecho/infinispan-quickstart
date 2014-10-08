@@ -74,12 +74,14 @@
 		</dependency>
 
 		<!-- Infinispan dependency -->
+		<!-- 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-cdi</artifactId>
 			<version>${infinispan.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		 -->
 
 		<!-- Import the CDI API, we use provided scope as the API is included in 
 			JBoss AS 7 -->
@@ -136,7 +138,7 @@
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>7.3.Final</version>
+				<version>7.3.Final</version>				
 			</plugin>
 
 			<!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation 
